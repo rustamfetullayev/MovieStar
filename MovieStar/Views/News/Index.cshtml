@@ -1,0 +1,96 @@
+﻿@model IEnumerable<MovieStar.Models.News>
+
+@{
+    ViewBag.Title = "MovieStar - News";
+}
+
+<!-- Main theme -->
+<section id="main_theme">
+    <img src="~/Source/images/hero-whats-on.jpg" alt="" class="back_img">
+    <div class="text">
+        <p>THE VERY LATEST</p>
+        <h3>Cinema news</h3>
+    </div>
+    <img class="arrow" src="~/Source/images/scroll-arrow.svg" alt="">
+</section>
+<!-- End of section -->
+<!-- News -->
+<section id="news">
+    <div class="container">
+        <div class="row pt-5 pb-5" id="all_news">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-12 mt-5 d-flex justify-content-center">
+                    <div class="row inner">
+                        <div class="col-md-8 d-flex justify-content-center">
+                            <div class="main_img">
+                                <img src="~/Source/images/@item.Image_1" alt="">
+                                <a href="/News/Single/@item.ID">
+                                    <div class="layout"></div>
+                                </a>
+                                <a href="/News/Single/@item.ID">
+                                    <div class="hover_text">
+                                        <i class="fas fa-link"></i>
+                                        <span>@item.PostDate.Value.ToString("MMMM dd, yyyy")</span>
+                                        <span>by @item.Author</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mini_img">
+                                <img src="~/Source/images/@item.Image_2" alt="">
+                                <img src="~/Source/images/@item.Image_3" alt="">
+                                <img src="~/Source/images/@item.Image_4" alt="">
+                                <img src="~/Source/images/@item.Image_5" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="text">
+                                <h4>@item.Title</h4>
+                                <p>
+                                    @item.Content.Substring(0, 180)
+                                    <a href="/News/Single/@item.ID" class="read">Read more ...</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>
+<!-- End of News -->
+
+@section scripts
+{
+    <script>
+        //Loading films with scroll event...
+        var skipCount = 0;
+
+        var scrollLoadFunction = function () {
+            if ($(document).height() - $(window).scrollTop() - $(window).height() < 100) {
+                skipCount += 3;
+
+                $.ajax({
+                    url: "/News/ScrollLoadNews",
+                    type: "GET",
+                    data: { skip: skipCount },
+                    success: function (res) {
+                        if (res.trim().length != 0) {
+                            $("#all_news").append(res);
+
+                        }
+                        else {
+                            window.removeEventListener("scroll", scrollLoadFunction);
+                        }
+                    }
+                })
+            }
+        }
+
+        window.addEventListener("scroll", scrollLoadFunction);
+     </script>
+}
+

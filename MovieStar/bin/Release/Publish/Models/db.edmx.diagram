@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ffd1f3f8ca94fe48c89a56a5b7454b7" Name="Diagram1">
+        <EntityTypeShape EntityType="MovieStarModel.Actor" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStarModel.Category" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStarModel.Country" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStarModel.Director" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStarModel.Dublaj" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStarModel.Film" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStarModel.Film_to_Genre" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStarModel.Genre" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="MovieStarModel.FK__Film__DublajID__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStarModel.FK__Film_to_G__FilmI__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStarModel.FK__Film_to_G__Genre__37A5467C" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MovieStarModel.Film_to_Country" Width="1.5" PointX="10" PointY="2.375" />
+        <EntityTypeShape EntityType="MovieStarModel.Film_to_Director" Width="1.5" PointX="10" PointY="5.625" />
+        <AssociationConnector Association="MovieStarModel.FK__Film_to_C__Count__3F466844" />
+        <AssociationConnector Association="MovieStarModel.FK__Film_to_D__Direc__3B75D760" />
+        <AssociationConnector Association="MovieStarModel.FK__Film_to_C__FilmI__3E52440B" />
+        <AssociationConnector Association="MovieStarModel.FK__Film_to_D__FilmI__3A81B327" />
+        <AssociationConnector Association="MovieStarModel.FK__Film__CategoryID__403A8C7D" />
+        <EntityTypeShape EntityType="MovieStarModel.Film_to_Actor" Width="1.5" PointX="10" PointY="0.75" />
+        <AssociationConnector Association="MovieStarModel.FK__Film_to_A__Actor__4AB81AF0" />
+        <AssociationConnector Association="MovieStarModel.FK__Film_to_A__FilmI__49C3F6B7" />
+        <EntityTypeShape EntityType="MovieStarModel.News" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="MovieStarModel.User" Width="1.5" PointX="3.375" PointY="9.75" />
+        <EntityTypeShape EntityType="MovieStarModel.LikedFilm" Width="1.5" PointX="5.625" PointY="9.625" />
+        <AssociationConnector Association="MovieStarModel.FK__LikedFilm__FilmI__6383C8BA" />
+        <AssociationConnector Association="MovieStarModel.FK__LikedFilm__UserI__628FA481" />
+        <EntityTypeShape EntityType="MovieStarModel.SavedFilm" Width="1.5" PointX="8.625" PointY="9.625" />
+        <AssociationConnector Association="MovieStarModel.FK__SavedFilm__FilmI__6754599E" />
+        <AssociationConnector Association="MovieStarModel.FK__SavedFilm__UserI__66603565" />
+        <EntityTypeShape EntityType="MovieStarModel.Comment" Width="1.5" PointX="11.625" PointY="8.625" />
+        <AssociationConnector Association="MovieStarModel.FK__Comment__FilmID__70DDC3D8" />
+        <AssociationConnector Association="MovieStarModel.FK__Comment__UserID__6FE99F9F" />
+        <EntityTypeShape EntityType="MovieStarModel.DislikedFilm" Width="1.5" PointX="11.625" PointY="12.25" />
+        <AssociationConnector Association="MovieStarModel.FK__DislikedF__FilmI__03F0984C" />
+        <AssociationConnector Association="MovieStarModel.FK__DislikedF__UserI__02FC7413" />
+        <EntityTypeShape EntityType="MovieStarModel.Admin" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MovieStarModel.NewsComment" Width="1.5" PointX="5.625" PointY="13.25" />
+        <AssociationConnector Association="MovieStarModel.FK__NewsComme__NewsI__2DE6D218" />
+        <AssociationConnector Association="MovieStarModel.FK__NewsComme__UserI__2CF2ADDF" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

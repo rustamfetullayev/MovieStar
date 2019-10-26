@@ -1,0 +1,146 @@
+﻿@model MovieStar.Models.Film
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Film</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Main_Img)
+        </dt>
+
+        <dd>
+            <img src="~/Source/images/@Model.Main_Img" style="width:240px;height:320px;" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Model.Year.Value.Year
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IMDB)
+        </dt>
+
+        <dd>
+            @Model.IMDB.ToString().Substring(0, 3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViewCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dublaj.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dublaj.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aboout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aboout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Iframe)
+        </dt>
+
+        <dd>
+            <iframe src="@Model.Iframe" frameborder="0" allowfullscreen="allowfullscreen" style="width:400px;height:226px;"></iframe>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trailer)
+        </dt>
+
+        <dd>
+            <iframe src="@Model.Trailer" frameborder="0" allowfullscreen="allowfullscreen" style="width:400px;height:226px;"></iframe>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cover_Img)
+        </dt>
+
+        <dd>
+            <img src="~/Source/images/@Model.Cover_Img" style="width:400px;height:226px;" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Iframe_Cover_Img)
+        </dt>
+
+        <dd>
+            <img src="~/Source/images/@Model.Iframe_Cover_Img" style="width:400px;height:226px;" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Video_Img)
+        </dt>
+
+        <dd>
+            <img src="~/Source/images/@Model.Video_Img" style="width:400px;height:226px;" />
+        </dd>
+    </dl>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger btn-lg"/> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

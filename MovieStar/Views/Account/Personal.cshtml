@@ -1,0 +1,179 @@
+﻿@model MovieStar.ViewModels.UserPersonalVM
+
+@{
+    ViewBag.Title = "MovieStar - " + Model.User.Username;
+}
+
+<!-- Main theme -->
+<section id="main_theme">
+    <img src="~/Source/images/register_back.jpg" alt="" class="back_img">
+    <div class="text">
+        <p>Welcome</p>
+        <h3>@Model.User.Name</h3>
+    </div>
+    <img class="arrow" src="~/Source/images/scroll-arrow.svg" alt="">
+</section>
+<!-- End of section -->
+
+<!-- Personal info -->
+<section id="personal">
+    <div class="container">
+        <div class="row pt-5 pb-5">
+            <div class="col-md-12">
+                <div class="inner row">
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <div class="image">
+                            <img class="usr_img" src="~/Source/images/@Model.User.Image" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="info">
+                            <span class="username">@Model.User.Username</span>
+                            <a href="/Account/Edit" class="edit">Edit Profile</a>
+                            <a href="/Account/Logout">
+                                <i class="fas fa-power-off"></i>
+                            </a>
+                            <p class="usr_activity">
+                                <span>
+                                    <b>@Model.LikedFilms.Count()</b> likes
+                                </span>
+                                <span>
+                                    <b>@Model.SavedFilms.Count()</b> saves
+                                </span>
+                            </p>
+                            <p class="usr_fullname">@Model.User.Name</p>
+                            <p class="usr_bio">@Model.User.Bio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="posts">
+                    <nav>
+                        <ul>
+                            <li id="liked" class="active">Liked</li>
+                            <li id="saved">Saved</li>
+                        </ul>
+                    </nav>
+                    <div class="screen">
+                        <div class="liked row selected">
+                            @foreach (var item in Model.LikedFilms)
+                            {
+                                <div class="col-md-12 mt-5">
+                                    <div class="name">
+                                        <h4>@item.Name</h4>
+                                    </div>
+                                    <div class="inner">
+                                        <div class="link_image">
+                                            <a href="/Film/Single/@item.ID">
+                                                <img src="~/Source/images/@item.Main_Img" alt="">
+                                                <span class="dublaj" style="background-color:@item.Dublaj.Color">@item.Dublaj.Name</span>
+                                            </a>
+                                        </div>
+                                        <div class="link_video">
+                                            <a href="/Film/Single/@item.ID">
+                                                <img src="~/Source/images/@item.Video_Img" alt="">
+                                                <span class="play"></span>
+                                                <span class="layout"></span>
+                                                <span class="length">@item.Length</span>
+                                            </a>
+                                        </div>
+                                        <div class="about">
+                                            <dl>
+                                                <dt>Year</dt>
+                                                <dd>@item.Year.Value.Year</dd>
+                                                <dt>IMDB</dt>
+                                                <dd>@item.IMDB</dd>
+                                                <dt>Country</dt>
+                                                <dd>
+                                                    @{ var d = 0; }
+                                                    @foreach (var c in Model.Country_of_Film.Where(f => f.FilmID == item.ID))
+                                                    {
+                                                        d++;
+                                                        <a href="/Film/Country/@c.Country.Name">@c.Country.Name@(d < Model.Country_of_Film.Where(f => f.CountryID == item.ID).ToArray().Length ? "," : "" ) </a>
+                                                    }
+                                                </dd>
+                                                <dt>Genre</dt>
+                                                <dd>
+                                                    @{ var i = 0; }
+                                                    @foreach (var g in Model.Genres_of_Film.Where(f => f.FilmID == item.ID))
+                                                    {
+                                                        i++;
+                                                        <a href="/Film/Genre/@g.Genre.Name">@g.Genre.Name@(i < Model.Genres_of_Film.Where(f => f.FilmID == item.ID).ToArray().Length ? "," : "" ) </a>
+                                                    }
+                                                </dd>
+                                                <dt>Views</dt>
+                                                <dd>
+                                                    <i class="fas fa-eye"></i>@item.ViewCount
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                        <div class="saved row">
+                            @foreach (var item in Model.SavedFilms)
+                            {
+                                <div class="col-md-12 mt-5">
+                                    <div class="name">
+                                        <h4>@item.Name</h4>
+                                    </div>
+                                    <div class="inner">
+                                        <div class="link_image">
+                                            <a href="/Film/Single/@item.ID">
+                                                <img src="~/Source/images/@item.Main_Img" alt="">
+                                                <span class="dublaj" style="background-color:@item.Dublaj.Color">@item.Dublaj.Name</span>
+                                            </a>
+                                        </div>
+                                        <div class="link_video">
+                                            <a href="/Film/Single/@item.ID">
+                                                <img src="~/Source/images/@item.Video_Img" alt="">
+                                                <span class="play"></span>
+                                                <span class="layout"></span>
+                                                <span class="length">@item.Length</span>
+                                            </a>
+                                        </div>
+                                        <div class="about">
+                                            <dl>
+                                                <dt>Year</dt>
+                                                <dd>@item.Year.Value.Year</dd>
+                                                <dt>IMDB</dt>
+                                                <dd>@item.IMDB</dd>
+                                                <dt>Country</dt>
+                                                <dd>
+                                                    @{ var d = 0; }
+                                                    @foreach (var c in Model.Country_of_Film.Where(f => f.FilmID == item.ID))
+                                                    {
+                                                        d++;
+                                                        <a href="/Film/Country/@c.Country.Name">@c.Country.Name@(d < Model.Country_of_Film.Where(f => f.CountryID == item.ID).ToArray().Length ? "," : "" ) </a>
+                                                    }
+                                                </dd>
+                                                <dt>Genre</dt>
+                                                <dd>
+                                                    @{ var i = 0; }
+                                                    @foreach (var g in Model.Genres_of_Film.Where(f => f.FilmID == item.ID))
+                                                    {
+                                                        i++;
+                                                        <a href="/Film/Genre/@g.Genre.Name">@g.Genre.Name@(i < Model.Genres_of_Film.Where(f => f.FilmID == item.ID).ToArray().Length ? "," : "" ) </a>
+                                                    }
+                                                </dd>
+                                                <dt>Views</dt>
+                                                <dd>
+                                                    <i class="fas fa-eye"></i>@item.ViewCount
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of Personal -->

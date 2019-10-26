@@ -1,0 +1,16 @@
+﻿@model MovieStar.Models.Comment
+
+<div class="col-dm-12 mt-3 comment_body">
+    <div class="row">
+        <div class="col-md-2">
+            <img class="usr_img" src="~/Source/images/@Model.User.Image" alt="">
+        </div>
+        <div class="col-md-10">
+            <div class="text">
+                <p class="date">@String.Format("{0:f}",Model.ComTime)</p>
+                <p class="name">@Model.User.Username</p>
+                <p class="content">@Model.Content</p>
+            </div>
+        </div>
+    </div>
+</div>

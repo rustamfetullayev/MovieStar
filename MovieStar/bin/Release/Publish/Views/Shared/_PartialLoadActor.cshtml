@@ -1,0 +1,16 @@
+﻿@model MovieStar.ViewModels.ActorIndexVM
+
+@foreach (var item in Model.Actors)
+{
+    <div class="col-md-2 col-6 mb-4">
+        <div class="inner">
+            <a href="/Film/Actor/@item.Name"></a>
+            <img src="~/Source/images/@item.Image" alt="">
+            <div class="text">
+                <p class="name">@item.Name</p>
+                <p class="role_count">Starring movie: @Model.Actor_of_Film.Where(a => a.ActorID == item.ID).Count()</p>
+            </div>
+        </div>
+    </div>
+
+}

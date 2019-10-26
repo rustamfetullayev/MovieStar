@@ -1,0 +1,144 @@
+﻿@model MovieStar.ViewModels.SingleNewsVM
+
+@{
+    ViewBag.Title = "MovieStar - News";
+}
+
+<!-- Main theme -->
+<section id="main_theme">
+    <img src="~/Source/images/@Model.News.Image_1" alt="" class="back_img">
+    <div class="text">
+        <p>@Model.News.Title</p>
+        <h3>by @Model.News.Author</h3>
+    </div>
+    <img class="arrow" src="~/Source/images/scroll-arrow.svg" alt="">
+</section>
+<!-- End of section -->
+
+<!-- News main -->
+<section id="news_main">
+    <div class="container">
+        <div class="row pt-5 pb-5">
+            <div class="col-md-12 mt-5 d-flex justify-content-center">
+                <div class="row inner">
+                    <div class="col-md-12 d-flex justify-content-center mb-4">
+                        <div class="main_img">
+                            <img src="~/Source/images/@Model.News.Image_1" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <div class="mini_img">
+                            <img src="~/Source/images/@Model.News.Image_2" alt="">
+                            <img src="~/Source/images/@Model.News.Image_3" alt="">
+                            <img src="~/Source/images/@Model.News.Image_4" alt="">
+                            <img src="~/Source/images/@Model.News.Image_5" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="text">
+                            <h4>@Model.News.Title</h4>
+                            <p>@Model.News.Content</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of section -->
+
+<!-- Comments -->
+<section id="comments">
+    <div class="container">
+        <div class="row">
+
+            <!-- Comments -->
+            <div class="col-md-7 mb-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header">
+                            <h3>COMMENTS</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-12 all_comments">
+                        <div class="row" id="all_comments">
+                            @foreach (var item in Model.Comments)
+                            {
+                                <div class="col-dm-12 mt-3 comment_body">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img class="usr_img" src="~/Source/images/@item.User.Image" alt="">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="text">
+                                                <p class="date">@String.Format("{0:f}", item.ComTime)</p>
+                                                <p class="name">@item.User.Username</p>
+                                                <p class="content">@item.Content</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comment area -->
+            <div class="col-md-4 offset-md-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header">
+                            <h3>Leave a comment</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-5">
+                        <div class="comment_text">
+                            <p>Comment *</p>
+                            <textarea name="text" id="content" cols="40" rows="7" required></textarea>
+                            @if (Session["user"] != null)
+                            {
+                                <input type="button" value="POST COMMENT" id="add_com">
+                                <input type="hidden" value="@Model.News.ID" name="newsid" id="newsid" />
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3 alert alert-danger" id="error_alert" style="display:none;">
+                        <p>Please write anything first!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of section -->
+
+@section scripts
+{
+    <script>
+        var content = $("#content");
+        var newsid = $("#newsid");
+
+        //Comments
+        $("#add_com").click(function () {
+            if (content.val().trim() != "") {
+                $("#error_alert").css("display", "none");
+
+                $.ajax({
+                    url: "/News/AddComment",
+                    data: { text: content.val(), newsid: newsid.val() },
+                    type: "post",
+                    dataType: "html",
+                    success: function (res) {
+                        $("#all_comments").prepend(res);
+                        $("#content").val('');
+                    }
+                })
+            }
+            else {
+                $("#error_alert").css("display", "block");
+            }
+        });
+    </script>
+}

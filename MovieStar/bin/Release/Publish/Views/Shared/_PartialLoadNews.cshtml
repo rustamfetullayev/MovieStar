@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MovieStar.Models.News>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-12 mt-5 d-flex justify-content-center">
+        <div class="row inner">
+            <div class="col-md-8 d-flex justify-content-center">
+                <div class="main_img">
+                    <img src="~/Source/images/@item.Image_1" alt="">
+                    <a href="/News/Single/@item.ID">
+                        <div class="layout"></div>
+                    </a>
+                    <div class="hover_text">
+                        <i class="fas fa-link"></i>
+                        <span>@item.PostDate.Value.ToString("MMMM dd, yyyy")</span>
+                        <span>by @item.Author</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mini_img">
+                    <img src="~/Source/images/@item.Image_2" alt="">
+                    <img src="~/Source/images/@item.Image_3" alt="">
+                    <img src="~/Source/images/@item.Image_4" alt="">
+                    <img src="~/Source/images/@item.Image_5" alt="">
+                </div>
+            </div>
+            <div class="col-md-12 mt-3">
+                <div class="text">
+                    <h4>@item.Title</h4>
+                    <p>
+                        @item.Content.Substring(0, 180)
+                        <a href="/News/Single/@item.ID" class="read">Read more ...</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

@@ -1,0 +1,350 @@
+﻿@using MovieStar.Models
+@model MovieStar.ViewModels.SingleFilmVM
+@{
+    ViewBag.Title = "MovieStar - " + Model.Film.Name + "("+Model.Film.Year.Value.Year+")";
+}
+
+<!-- Trailer -->
+<div id="trailer">
+    <iframe id="trailer_iframe" src="@Model.Film.Trailer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+</div>
+<!-- End of Trailer -->
+<!-- Main theme -->
+<section id="selected_film">
+    <img src="~/Source/images/@Model.Film.Cover_Img" alt="" class="back_img">
+    <div class="content">
+        <div class="categories">
+            @{ var i = 0; }
+            @foreach (var g in Model.Genres_of_Film)
+            {
+                i++;
+                <span>@g.Genre.Name@(i < Model.Genres_of_Film.ToArray().Length ? "," : "" ) </span>
+            }
+        </div>
+        <h3 class="title">@Model.Film.Name</h3>
+        <h6 class="subtitle">@Model.Film.Aboout</h6>
+        <div class="buttons">
+            <span>PG</span>
+            <button class="play">
+                <i class="fas fa-play"></i> PLAY TRAILER
+            </button>
+        </div>
+        <div class="rating">
+            <div class="star-ratings-sprite">
+                @{
+                    decimal? IMDB_Percent = 0;
+                    IMDB_Percent = Model.Film.IMDB * 10;
+                }
+                <span style="width:@IMDB_Percent.ToString()%" class="star-ratings-sprite-rating"></span>
+            </div>
+        </div>
+    </div>
+    <img class="arrow" src="~/Source/images/scroll-arrow.svg" alt="">
+</section>
+<!-- End of section -->
+<!-- Film -->
+<section id="film">
+    <div class="container">
+        <div class="row mt-5 pt-5">
+            <div class="col-md-12 mb-5">
+                <div class="header">
+                    <h3>SYNOPSIS</h3>
+                </div>
+            </div>
+            <div class="col-md-3 mb-5">
+                <div class="link_image">
+                    <a>
+                        <img src="~/Source/images/@Model.Film.Main_Img" alt="">
+                        <span class="dublaj" style="background-color: @Model.Film.Dublaj.Color;">@Model.Film.Dublaj.Name</span>
+                    </a>
+                </div>
+                <div class="networks">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-pinterest"></i>
+                    <i class="fab fa-google-plus-g"></i>
+                </div>
+            </div>
+            <div class="col-md-9 mb-5">
+                <div class="about">
+                    <h3 class="title">Description</h3>
+                    <p class="subtitle">@Model.Film.Aboout</p>
+                    <dl>
+                        <dt>Year</dt>
+                        <dd>@Model.Film.Year.Value.Year</dd>
+                        <dt>IMDB</dt>
+                        <dd>@Model.Film.IMDB</dd>
+                        <dt>Country</dt>
+                        <dd>
+                            @{ var d = 0; }
+                            @foreach (var c in Model.Country_of_Film)
+                            {
+                                d++;
+                                <a href="/Film/Country/@c.Country.Name">@c.Country.Name@(d < Model.Country_of_Film.ToArray().Length ? "," : "" ) </a>
+                            }
+                        </dd>
+                        <dt>Genre</dt>
+                        <dd>
+                            @{ var u = 0; }
+                            @foreach (var g in Model.Genres_of_Film)
+                            {
+                                i++;
+                                <a href="/Film/Genre/@g.Genre.Name">@g.Genre.Name@(u < Model.Genres_of_Film.ToArray().Length ? "," : "" ) </a>
+                            }
+                        </dd>
+                        <dt>Category</dt>
+                        <dd>
+                            <a href="/Film/Category/@Model.Film.Category.Name">@Model.Film.Category.Name</a>
+                        </dd>
+                        <dt>Length</dt>
+                        <dd>@Model.Film.Length</dd>
+                        <dt>Translation</dt>
+                        <dd>
+                            <a href="/Film/Dublaj/@Model.Film.Dublaj.Name">@Model.Film.Dublaj.Name</a>
+                        </dd>
+                        <dt>Director</dt>
+                        <dd>
+                            @{ var y = 0; }
+                            @foreach (var g in Model.Director_of_Film)
+                            {
+                                y++;
+                                <a href="/Film/Director/@g.Director.Name">@g.Director.Name@(y < Model.Director_of_Film.ToArray().Length ? "," : "" ) </a>
+                            }
+                        </dd>
+                        <dt>Starring</dt>
+                        <dd>
+                            @{ var j = 0; }
+                            @foreach (var g in Model.Actor_of_Film)
+                            {
+                                j++;
+                                <a href="/Film/Actor/@g.Actor.Name">@g.Actor.Name@(j < Model.Actor_of_Film.ToArray().Length ? "," : "" ) </a>
+                            }
+                            and also...
+                        </dd>
+                    </dl>
+                    <div class="like_dislike_buttons">
+                        @if (Session["user"] != null && Model.Film.LikedFilms.Where(l => l.FilmID == Model.Film.ID && l.UserID == ((User)Session["user"]).ID).Count() == 1)
+                        {
+                            <button class="like_post active">
+                                @Model.LikedFilms.Where(l => l.FilmID == Model.Film.ID).Count()
+                                <i class="far fa-thumbs-up"></i>
+                            </button>
+                        }
+                        else if(Session["user"] != null && Model.Film.LikedFilms.Where(l => l.FilmID == Model.Film.ID && l.UserID == ((User)Session["user"]).ID).Count() == 0)
+                        {
+                            <button class="like_post">
+                                @Model.LikedFilms.Where(l => l.FilmID == Model.Film.ID).Count()
+                                <i class="far fa-thumbs-up"></i>
+                            </button>
+                        }
+                        else if(Session["user"] == null)
+                        {
+                            <form action="/Account/Login" style="display:inline-block;">
+                                <button class="like_post" type="submit">
+                                    @Model.LikedFilms.Where(l => l.FilmID == Model.Film.ID).Count()
+                                    <i class="far fa-thumbs-up"></i>
+                                </button>
+                            </form>
+                        }
+
+                        @if (Session["user"] != null && Model.Film.DislikedFilms.Where(l => l.FilmID == Model.Film.ID && l.UserID == ((User)Session["user"]).ID).Count() == 1)
+                        {
+                            <button class="dislike_post active">
+                                @Model.DislikedFilms.Where(l => l.FilmID == Model.Film.ID).Count()
+                                <i class="far fa-thumbs-down"></i>
+                            </button>
+                        }
+                        else if(Session["user"] != null && Model.Film.DislikedFilms.Where(l => l.FilmID == Model.Film.ID && l.UserID == ((User)Session["user"]).ID).Count() == 0)
+                        {
+                            <button class="dislike_post">
+                                @Model.DislikedFilms.Where(l => l.FilmID == Model.Film.ID).Count()
+                                <i class="far fa-thumbs-down"></i>
+                            </button>
+                        }
+                        else if(Session["user"] == null)
+                        {
+                            <form action="/Account/Login" style="display:inline-block;">
+                                <button class="dislike_post" type="submit">
+                                    @Model.DislikedFilms.Where(l => l.FilmID == Model.Film.ID).Count()
+                                    <i class="far fa-thumbs-down"></i>
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of Film -->
+<!-- Film Iframe -->
+<section id="film_iframe">
+    <img src="~/Source/images/@Model.Film.Iframe_Cover_Img" alt="" class="cover_img">
+    <iframe src="@Model.Film.Iframe" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+</section>
+<!-- End of section -->
+<!-- Comments -->
+<section id="comments">
+    <div class="container">
+        <div class="row mt-5 pt-3">
+
+            <!-- Comments -->
+            <div class="col-md-7 mb-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header">
+                            <h3>COMMENTS</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-12 all_comments">
+                        <div class="row" id="all_comments">
+                            @foreach (var item in Model.Comments)
+                            {
+                                <div class="col-dm-12 mt-3 comment_body">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img class="usr_img" src="~/Source/images/@item.User.Image" alt="">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="text">
+                                                <p class="date">@String.Format("{0:f}", item.ComTime)</p>
+                                                <p class="name">@item.User.Username</p>
+                                                <p class="content">@item.Content</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comment area -->
+            <div class="col-md-4 offset-md-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header">
+                            <h3>Leave a comment</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-5">
+                        <div class="comment_text">
+                            <p>Comment *</p>
+                            <textarea name="text" id="content" cols="40" rows="7" required></textarea>
+                            @if (Session["user"] != null)
+                            {
+                                <input type="button" value="POST COMMENT" id="add_com">
+                                <input type="hidden" value="@Model.Film.ID" name="filmid" id="filmid" />
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3 alert alert-danger" id="error_alert" style="display:none;">
+                        <p>Please write anything first!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of section -->
+
+@section scripts
+{
+    <script>
+        var content = $("#content");
+        var filmid = $("#filmid");
+        var likecount = parseInt($(".like_post").text());
+        var dislikecount = parseInt($(".dislike_post").text());
+
+        //Comments
+        $("#add_com").click(function () {
+            if (content.val().trim() != "") {
+                $("#error_alert").css("display", "none");
+
+                $.ajax({
+                    url: "/Film/AddComment",
+                    data: {
+                        text: content.val(),
+                        filmid: filmid.val()
+                    },
+                    type: "post",
+                    dataType: "html",
+                    success: function (res) {
+                        $("#all_comments").prepend(res);
+                        $("#content").val('');
+                    }
+                })
+            }
+            else {
+                $("#error_alert").css("display", "block");
+            }
+        });
+
+
+        //Like
+        $(".like_post").click(function () {
+            $.ajax({
+                url: "/Film/LikeFilm",
+                data: { filmid: filmid.val() },
+                type: "post",
+                dataType: "html",
+                success: function (res) {
+                    if (res == 1) {
+                        likecount++;
+                        $(".like_post").html(likecount +' <i class="far fa-thumbs-up"></i>');
+                        $(".like_post").addClass("active");
+                    }
+                    else if (res == 0) {
+                        likecount--;
+                        $(".like_post").html(likecount + ' <i class="far fa-thumbs-up"></i>');
+                        $(".like_post").removeClass("active");
+                    }
+                    else if (res == 2) {
+                        likecount++;
+                        dislikecount--;
+                        $(".dislike_post").html(dislikecount + ' <i class="far fa-thumbs-down"></i>');
+                        $(".like_post").html(likecount + ' <i class="far fa-thumbs-up"></i>');
+                        $(".like_post").addClass("active");
+                        $(".dislike_post").removeClass("active");
+                    }
+                }
+            })
+
+        })
+
+
+        //Dislike
+        $(".dislike_post").click(function () {
+            $.ajax({
+                url: "/Film/DislikeFilm",
+                data: { filmid: filmid.val() },
+                type: "post",
+                dataType: "html",
+                success: function (res) {
+                    if (res == 1) {
+                        dislikecount++;
+                        $(".dislike_post").html(dislikecount + ' <i class="far fa-thumbs-down"></i>');
+                        $(".dislike_post").addClass("active");
+                    }
+                    else if (res == 0) {
+                        dislikecount--;
+                        $(".dislike_post").html(dislikecount + ' <i class="far fa-thumbs-down"></i>');
+                        $(".dislike_post").removeClass("active");
+                    }
+                    else if (res == 2) {
+                        likecount--;
+                        dislikecount++;
+                        $(".dislike_post").html(dislikecount + ' <i class="far fa-thumbs-down"></i>');
+                        $(".like_post").html(likecount + ' <i class="far fa-thumbs-up"></i>');
+                        $(".dislike_post").addClass("active");
+                        $(".like_post").removeClass("active");
+                    }
+                }
+            })
+
+        })
+
+    </script>
+}

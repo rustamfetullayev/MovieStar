@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MovieStar.Models.Dublaj>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null,new { @class="btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <div class="dublaj_color" style="background-color:@item.Color">@item.Name</div>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @if (Model.ToArray().Length > 1)
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            }
+        </td>
+    </tr>
+}
+
+</table>
+
+<style>
+    .dublaj_color {
+        width: 50%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-family: 'Kalam', cursive;
+        text-transform: uppercase;
+    }
+</style>

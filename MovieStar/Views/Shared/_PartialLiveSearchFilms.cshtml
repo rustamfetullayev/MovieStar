@@ -1,0 +1,41 @@
+﻿@model MovieStar.ViewModels.AllFilmsVM
+<!-- Search AJAX -->
+<div id="live_search">
+    @foreach (var item in Model.Films)
+    {
+        <a href="/Film/Single/@item.ID">
+            <div class="image">
+                <img src="~/Source/images/@item.Main_Img" alt="">
+            </div>
+            <div class="details">
+                <p class="name">@item.Name</p>
+                <dl>
+                    <dt>Year:</dt>
+                    <dd>@item.Year.Value.Year</dd>
+                    <dt>IMDB:</dt>
+                    <dd>@item.IMDB</dd>
+                    <dt>Country:</dt>
+                    <dd>
+                        @{ var d = 0; }
+                        @foreach (var c in Model.Country_of_Film.Where(f => f.FilmID == item.ID))
+                        {
+                            d++;
+                            @c.Country.Name@(d < Model.Country_of_Film.Where(f => f.CountryID == item.ID).ToArray().Length ? "," : "" )
+                        }
+                    </dd>
+                    <dt>Genre:</dt>
+                    <dd>
+                        @{ var i = 0; }
+                        @foreach (var g in Model.Genres_of_Film.Where(f => f.FilmID == item.ID))
+                        {
+                            i++;
+                            <span>@g.Genre.Name@(i < Model.Genres_of_Film.Where(f => f.FilmID == item.ID).ToArray().Length ? "," : "" )</span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+        </a>
+
+    }
+</div> 
+<!-- End of Search -->

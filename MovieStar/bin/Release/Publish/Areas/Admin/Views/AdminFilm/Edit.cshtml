@@ -1,0 +1,216 @@
+﻿@model MovieStar.Models.Film
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "AdminFilm", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Film</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IMDB, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.IMDB, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.IMDB, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Iframe, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Iframe, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Iframe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Trailer, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Trailer, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Trailer, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Aboout, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Aboout, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Aboout, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Length, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Length, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Length, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Main_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <img src="~/Source/images/@Model.Main_Img" style="width:240px;height:320px;" />
+            <input type="file" name="New_Main_Img" class="btn btn-success" />
+            <input type="hidden" value="@Model.Main_Img" name="Main_Img" />
+            @Html.ValidationMessageFor(model => model.Main_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cover_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <img src="~/Source/images/@Model.Cover_Img" style="width:400px;height:226px;" />
+            <input type="file" name="New_Cover_Img" class="btn btn-success" />
+            <input type="hidden" value="@Model.Cover_Img" name="Cover_Img" />
+            @Html.ValidationMessageFor(model => model.Cover_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Iframe_Cover_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <img src="~/Source/images/@Model.Iframe_Cover_Img" style="width:400px;height:226px;" />
+            <input type="file" name="New_Iframe_Cover_Img" class="btn btn-success" />
+            <input type="hidden" value="@Model.Iframe_Cover_Img" name="Iframe_Cover_Img" />
+            @Html.ValidationMessageFor(model => model.Iframe_Cover_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Video_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <img src="~/Source/images/@Model.Video_Img" style="width:400px;height:226px;" />
+            <input type="file" name="New_Video_Img" class="btn btn-success" />
+            <input type="hidden" value="@Model.Video_Img" name="Video_Img" />
+            @Html.ValidationMessageFor(model => model.Video_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DublajID, "DublajID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select name="DublajID" id="DublajID" class="form-control">
+                @foreach (var item in ViewBag.Dublajs)
+                {
+                    <option @(Model.DublajID == item.ID ? "selected" : "") value="@item.ID">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.DublajID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select name="CategoryID" id="CategoryID" class="form-control">
+                @foreach (var item in ViewBag.Categories)
+                {
+                    <option @(Model.CategoryID == item.ID ? "selected" : "") value="@item.ID">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Genres</label>
+        <div class="col-md-10">
+            <select name="Genres" id="Genres" class="form-control" multiple style="height:300px;">
+                @foreach (var item in ViewBag.Genres)
+                {
+                    <option @(Model.Film_to_Genre.Any(g => g.GenreID == item.ID) ? "selected" : "") value="@item.ID">@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Countries</label>
+        <div class="col-md-10">
+            <select name="Countries" id="Countries" class="form-control" multiple style="height:300px;">
+                @foreach (var item in ViewBag.Countries)
+                {
+                    <option @(Model.Film_to_Country.Any(g => g.CountryID == item.ID) ? "selected" : "") value="@item.ID">@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Actors</label>
+        <div class="row">
+            <div class="col-md-10">
+                <select name="Actors" id="Actors" class="form-control" multiple style="height:500px;">
+                    @foreach (var item in ViewBag.Actors)
+                    {
+                        <option data-image="../../../Source/images/@item.Image" @(Model.Film_to_Actor.Any(g => g.ActorID == item.ID) ? "selected" : "") value="@item.ID">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <img id="actor_image" src="" style="width:240px;" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Directors</label>
+        <div class="col-md-10">
+            <select name="Directors" id="Directors" class="form-control" multiple style="height:300px;">
+                @foreach (var item in ViewBag.Directors)
+                {
+                    <option @(Model.Film_to_Director.Any(g => g.DirectorID == item.ID) ? "selected" : "") value="@item.ID">@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts
+{
+    <script>
+        $("#Actors option").hover(function () {
+            $("#actor_image").attr("src", $(this).data("image"));
+        }, function () {
+            $("#actor_image").attr("src", "");
+        });
+    </script>
+}

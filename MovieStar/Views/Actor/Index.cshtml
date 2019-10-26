@@ -1,0 +1,105 @@
+﻿@model MovieStar.ViewModels.ActorIndexVM
+
+@{
+    ViewBag.Title = "MovieStar - Actors";
+}
+
+<!-- Main theme -->
+<section id="main_theme">
+    <img src="~/Source/images/hero-news.jpg" alt="" class="back_img">
+    <div class="text">
+        <p>All our</p>
+        <h3>Actors</h3>
+    </div>
+    <div class="search">
+        <form method="post" action="/Actor/Search">
+            <input type="text" placeholder="Type to search" id="search" name="text" class="form-control" required>
+            <button type="submit" class="fas fa-search"></button>
+        </form>
+        <!-- Search AJAX -->
+        
+        <!-- End of Search -->
+    </div>
+</section>
+<!-- End of section -->
+
+<!-- Actors -->
+<section id="actors">
+    <div class="container">
+        <div class="row mt-5 pt-5 pb-5" id="all_actors">
+            @foreach (var item in Model.Actors)
+            {
+                <div class="col-md-2 col-6 mb-4">
+                    <div class="inner">
+                        <a href="/Film/Actor/@item.Name"></a>
+                        <img src="~/Source/images/@item.Image" alt="">
+                        <div class="text">
+                            <p class="name">@item.Name</p>
+                            <p class="role_count">Starring movie: @Model.Actor_of_Film.Where(a => a.ActorID == item.ID).Count()</p>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>
+<!-- End of Actors -->
+
+
+@section scripts
+{
+    <script>
+        //Loading films with scroll event...
+        var skipCount = 0;
+
+        var scrollLoadFunction = function () {
+            if ($(document).height() - $(window).scrollTop() - $(window).height() < 100) {
+                skipCount += 12;
+
+                $.ajax({
+                    url: "/Actor/ScrollLoadActors",
+                    type: "GET",
+                    data: { skip: skipCount },
+                    success: function (res) {
+                        if (res.trim().length != 0) {
+                            $("#all_actors").append(res);
+
+                        }
+                        else {
+                            window.removeEventListener("scroll", scrollLoadFunction);
+                        }
+                    }
+                })
+            }
+        }
+
+        window.addEventListener("scroll", scrollLoadFunction);
+
+
+        //Live Search
+        $("#search").keyup(function () {
+
+            if ($(this).val()) {
+
+                $.ajax({
+                    url: "/Actor/LiveSearchActor",
+                    data: { query: $(this).val() },
+                    type: "GET",
+                    dataType: "html",
+                    success: function (res) {
+                        if (res.length != 39) {
+                            $("#main_theme .search").append(res);
+                        }
+                        else {
+                            $("#main_theme .search #live_search_actor").css('display', 'none');
+                        }
+                    }
+                })
+            }
+            else {
+                $("#main_theme .search #live_search_actor").css('display', 'none');
+            }
+        })
+    </script>
+}

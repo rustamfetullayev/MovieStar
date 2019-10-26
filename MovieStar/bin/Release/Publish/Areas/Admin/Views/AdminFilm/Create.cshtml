@@ -1,0 +1,180 @@
+﻿@model MovieStar.Models.Film
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "AdminFilm", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Film</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IMDB, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.IMDB, new { htmlAttributes = new { @class = "form-control" , type = "number", step = "0.1" } })
+            @Html.ValidationMessageFor(model => model.IMDB, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Iframe, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Iframe, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Iframe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Trailer, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Trailer, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Trailer, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Aboout, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Aboout, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Aboout, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Length, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Length, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Length, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cover_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Cover_Img" class="btn btn-outline-success" />
+            @Html.ValidationMessageFor(model => model.Cover_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Main_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Main_Img" class="btn btn-outline-success" />
+            @Html.ValidationMessageFor(model => model.Main_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Iframe_Cover_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Iframe_Cover_Img" class="btn btn-outline-success" />
+            @Html.ValidationMessageFor(model => model.Iframe_Cover_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Video_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Video_Img" class="btn btn-outline-success" />
+            @Html.ValidationMessageFor(model => model.Video_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DublajID, "DublajID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("DublajID", (IEnumerable<SelectListItem>)ViewBag.Dublaj, new { @class = "form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryID", (IEnumerable<SelectListItem>)ViewBag.Categories, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Actors</label>
+        <div class="row">
+            <div class="col-md-10">
+                @*@Html.DropDownList("Actors", (IEnumerable<SelectListItem>)ViewBag.Actors, new { @class = "form-control", multiple = "true", style = "height:500px" })*@
+                <select class="form-control" id="Actors" multiple="true" name="Actors" style="height:500px">
+                    @foreach (var actor in ViewBag.Actors)
+                    {
+                        <option data-image="../../Source/images/@actor.Image" value="@actor.ID">@actor.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <img id="actor_image" src="" style="width:240px;" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Genres</label>
+        <div class="col-md-10">
+            @Html.DropDownList("Genres", (IEnumerable<SelectListItem>)ViewBag.Genres, new { @class = "form-control", multiple = "true", style = "height:300px" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Directors</label>
+        <div class="col-md-10">
+            @Html.DropDownList("Directors", (IEnumerable<SelectListItem>)ViewBag.Directors, new { @class = "form-control", multiple = "true", style = "height:500px" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Countries</label>
+        <div class="col-md-10">
+            @Html.DropDownList("Countries", (IEnumerable<SelectListItem>)ViewBag.Countries, new { @class = "form-control", multiple = "true", style = "height:300px" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success btn-lg" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts
+{
+    <script>
+        $("#Actors option").hover(function () {
+            $("#actor_image").attr("src", $(this).data("image"));
+        }, function () {
+            $("#actor_image").attr("src", "");
+        });
+    </script>
+}

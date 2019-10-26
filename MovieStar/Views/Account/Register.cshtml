@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "MovieStar - Register";
+}
+
+<!-- Main theme -->
+<section id="main_theme">
+    <img src="~/Source/images/register_back.jpg" alt="" class="back_img">
+    <div class="text">
+        <p>Sign up</p>
+        <h3>To our website</h3>
+    </div>
+    <img class="arrow" src="~/Source/images/scroll-arrow.svg" alt="">
+</section>
+<!-- End of section -->
+<!-- SignUp -->
+<section id="signup">
+    <div class="container">
+        <div class="row pt-5 pb-5">
+            <div class="col-md-12 d-flex justify-content-center">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <label for="Image">Profile image</label>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <div class="usr_new_image">
+                                <img id="user_show_img" src="~/Source/images/blank_avatar.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input id="live_usr_img" type="file" class="image" name="Image" onchange="readURL(this)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input type="text" name="name" placeholder="Enter your name..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input type="text" name="username" placeholder="Enter your username..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input type="email" name="email" placeholder="Enter your email..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <label for="bio">Bio</label>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input type="text" name="bio" placeholder="Enter your bio...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input type="password" name="password" placeholder="Enter your password..." required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <label for="confpass">Confirm password</label>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <input type="password" name="confpass" placeholder="Confirm your password..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input class="submit" type="submit" value="Register">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 d-flex justify-content-center">
+                        @if (ViewBag.RegisterError != null)
+                        {
+                            <div class="alert alert-danger">
+                                <p>@ViewBag.RegisterError</p>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of section -->

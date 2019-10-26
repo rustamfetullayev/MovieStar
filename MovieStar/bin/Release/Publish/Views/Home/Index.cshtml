@@ -1,0 +1,220 @@
+﻿@model MovieStar.ViewModels.IndexFilmVM
+@{
+    ViewBag.Title = "MovieStar - Home Page";
+}
+
+<!-- Trailer -->
+<div id="trailer">
+    <iframe id="trailer_iframe" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+</div>
+<!-- End of Trailer -->
+<!-- Main Slider -->
+<section id="main_slider">
+    <div class="owl-carousel owl-theme">
+        @foreach (var item in Model.Most_Popular_3_Film)
+        {
+            <div class="item">
+                <div class="content">
+                    <div class="categories">
+                        @{ var i = 0; }
+                        @foreach (var g in Model.Genres_of_Film.Where(f=>f.FilmID==item.ID))
+                        {
+                            i++;
+                            <span>@g.Genre.Name@(i < Model.Genres_of_Film.Where(f => f.FilmID == item.ID).ToArray().Length ? "," : "" ) </span>
+                        }
+                    </div>
+                    <h3 class="title">@item.Name</h3>
+                    <h6 class="subtitle">@item.Aboout</h6>
+                    <div class="buttons">
+                        <span>PG</span>
+                        <button class="play">
+                            <i class="fas fa-play"></i> PLAY TRAILER
+                        </button>
+                        <input type="hidden" src="@item.Trailer">
+                    </div>
+                </div>
+                <img class="animated fadeIn" src="~/Source/images/@item.Cover_Img" alt="">
+            </div>
+
+        }
+    </div>
+    <img class="arrow" src="~/Source/images/scroll-arrow.svg" alt="">
+</section>
+<!-- End of Main Slider -->
+
+<!-- Top Rated Films -->
+<section id="rated_films">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-5 mb-5">
+                <div class="header">
+                    <h3>Top Rated Films</h3>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="film_slider">
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in Model.Top_Rated_5_Film)
+                        {
+                            <div class="item">
+                                <div class="main">
+                                    <div class="text">
+                                        <a href="/Film/Single/@item.ID">
+                                            <i class="fas fa-play"></i>
+                                        </a>
+                                        <p>Watch Now</p>
+                                        <p>@item.Year.Value.ToString("MMMM dd, yyyy")</p>
+                                    </div>
+                                    <a href="/Film/Single/@item.ID" class="layout"></a>
+                                    <img src="~/Source/images/@item.Main_Img" alt="">
+                                </div>
+                                <div class="name">
+                                    <h5>@item.Name</h5>
+                                </div>
+                                <div class="rating">
+                                    <div class="star-ratings-sprite">
+                                        @{
+                                            decimal? IMDB_Percent = 0;
+                                            IMDB_Percent = item.IMDB * 10;
+                                        }
+                                        <span style="width:@IMDB_Percent.ToString()%" class="star-ratings-sprite-rating"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End of Rated Films -->
+<!-- Last 5 film -->
+<section id="last_5_film">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12 mb-5">
+                <div class="header">
+                    <h3>New Films</h3>
+                </div>
+            </div>
+            @foreach (var item in Model.Last_Added_5_Film)
+            {
+                <div class="col-md-12 mb-5">
+                    <div class="name">
+                        <h4>@item.Name</h4>
+                    </div>
+                    <div class="inner">
+                        <div class="link_image">
+                            <a href="/Film/Single/@item.ID">
+                                <img src="~/Source/images/@item.Main_Img" alt="">
+                                <span class="dublaj" style="background-color:@item.Dublaj.Color">@item.Dublaj.Name</span>
+                            </a>
+                        </div>
+                        <div class="link_video">
+                            <a href="/Film/Single/@item.ID">
+                                <img src="~/Source/images/@item.Video_Img" alt="">
+                                <span class="play"></span>
+                                <span class="layout"></span>
+                                <span class="length">@item.Length</span>
+                            </a>
+                        </div>
+                        <div class="about">
+                            <dl>
+                                <dt>Year</dt>
+                                <dd>@item.Year.Value.Year</dd>
+                                <dt>IMDB</dt>
+                                <dd>@item.IMDB</dd>
+                                <dt>Country</dt>
+                                <dd>
+                                    @{ var d = 0; }
+                                    @foreach (var c in Model.Country_of_Film.Where(f => f.FilmID == item.ID))
+                                    {
+                                        d++;
+                                        <a href="/Film/Country/@c.Country.Name">@c.Country.Name@(d < Model.Country_of_Film.Where(f => f.CountryID == item.ID).ToArray().Length ? "," : "" ) </a>
+                                    }
+                                </dd>
+                                <dt>Genre</dt>
+                                <dd>
+                                    @{ var i = 0; }
+                                    @foreach (var g in Model.Genres_of_Film.Where(f => f.FilmID == item.ID))
+                                    {
+                                        i++;
+                                        <a href="/Film/Genre/@g.Genre.Name">@g.Genre.Name@(i < Model.Genres_of_Film.Where(f => f.FilmID == item.ID).ToArray().Length ? "," : "" ) </a>
+                                    }
+                                </dd>
+                                <dt>Views</dt>
+                                <dd>
+                                    <i class="fas fa-eye"></i>@item.ViewCount
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <div class="col-md-12 d-flex justify-content-center mb-5">
+                <a href="/Film/Index" class="more">View More</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of section -->
+
+<!-- Top IMDB rated film -->
+<section id="top_imdb">
+    <img src="~/Source/images/@Model.Top_IMDB_Film.Cover_Img" class="cover_img" alt="">
+    <div class="container">
+        <div class="row pt-5">
+            <div class="col-md-12 mb-5">
+                <div class="header">
+                    <h3>IMDB Top Rated Film</h3>
+                </div>
+            </div>
+            <div class="col-md-6 mt-5 mb-md-5 pb-md-5">
+                <div class="about">
+                    <span class="genre">
+                        @{ var o = 0; }
+                        @foreach (var g in Model.Genres_of_Film.Where(f => f.FilmID == @Model.Top_IMDB_Film.ID))
+                        {
+                            o++;
+                            <a href="/Film/Genre/@g.Genre.Name">@g.Genre.Name@(o < Model.Genres_of_Film.Where(f => f.FilmID == @Model.Top_IMDB_Film.ID).ToArray().Length ? "," : "" ) </a>
+                        }
+                    </span>
+                    <h4 class="name">@Model.Top_IMDB_Film.Name</h4>
+                    <div class="rating">
+                        <div class="star-ratings-sprite">
+                            @{
+                                decimal? IMDB = 0;
+                                IMDB = Model.Top_IMDB_Film.IMDB * 10;
+                            }
+                            <span style="width:@IMDB.ToString()%" class="star-ratings-sprite-rating"></span>
+                        </div>
+                    </div>
+                    <div class="date">
+                        <i class="fas fa-calendar-week"></i>
+                        @Model.Top_IMDB_Film.Year.Value.ToString("MMMM dd, yyyy")
+                    </div>
+                    <p class="about_film">@Model.Top_IMDB_Film.Aboout</p>
+                    <a href="/Film/Single/@Model.Top_IMDB_Film.ID" class="more">More Info</a>
+                </div>
+            </div>
+            <div class="col-md-6 mt-5 mb-md-5 pb-5">
+                <div class="link_video">
+                    <a href="/Film/Single/@Model.Top_IMDB_Film.ID">
+                        <img src="~/Source/images/@Model.Top_IMDB_Film.Video_Img" alt="">
+                        <span class="play"></span>
+                        <span class="drop1"></span>
+                        <span class="drop2"></span>
+                        <span class="drop3"></span>
+                        <span class="drop4"></span>
+                        <span class="length">@Model.Top_IMDB_Film.Length</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of section -->

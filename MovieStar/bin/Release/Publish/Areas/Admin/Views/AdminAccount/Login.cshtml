@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Main theme -->
+<section id="main_theme">
+    <img src="~/Source/images/register_back.jpg" alt="" class="back_img">
+    <div class="text">
+        <p>Login</p>
+        <h3>To your admin account</h3>
+    </div>
+    <img class="arrow" src="~/Source/images/scroll-arrow.svg" alt="">
+</section>
+<!-- End of section -->
+
+<!-- SignUp -->
+<section id="login">
+    <div class="container">
+        <div class="row pt-5 pb-5">
+            <div class="col-md-12 d-flex justify-content-center">
+                <form method="post">
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input type="text" name="username" id="" placeholder="Enter your username..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input type="password" name="password" id="" placeholder="Enter your password..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <input class="submit" type="submit" value="Login">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-12 d-flex justify-content-center">
+                @if (ViewBag.LoginError != null)
+                {
+                    <div class="alert alert-danger">
+                        <p>@ViewBag.LoginError</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of section -->

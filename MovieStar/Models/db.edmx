@@ -1,0 +1,1320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MovieStarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="ComTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Director">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DislikedFilms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="DisLikeTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Dublaj">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="Color" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Year" Type="datetime" />
+          <Property Name="IMDB" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="Iframe" Type="nvarchar" MaxLength="255" />
+          <Property Name="Trailer" Type="nvarchar" MaxLength="255" />
+          <Property Name="Aboout" Type="nvarchar" MaxLength="500" />
+          <Property Name="Length" Type="nvarchar" MaxLength="20" />
+          <Property Name="Cover_Img" Type="nvarchar" MaxLength="255" />
+          <Property Name="Main_Img" Type="nvarchar" MaxLength="255" />
+          <Property Name="Iframe_Cover_Img" Type="nvarchar" MaxLength="255" />
+          <Property Name="ViewCount" Type="int" />
+          <Property Name="DublajID" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Video_Img" Type="nvarchar" MaxLength="255" />
+          <Property Name="CategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="Film_to_Actor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="ActorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Film_to_Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="CountryID" Type="int" />
+        </EntityType>
+        <EntityType Name="Film_to_Director">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="DirectorID" Type="int" />
+        </EntityType>
+        <EntityType Name="Film_to_Genre">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="GenreID" Type="int" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LikedFilms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="LikeTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+          <Property Name="Content" Type="nvarchar" MaxLength="3000" />
+          <Property Name="Author" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image_1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Image_2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Image_3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Image_4" Type="nvarchar" MaxLength="255" />
+          <Property Name="Image_5" Type="nvarchar" MaxLength="255" />
+          <Property Name="PostDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NewsComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="NewsID" Type="int" />
+          <Property Name="ComTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SavedFilms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="FilmID" Type="int" />
+          <Property Name="SaveTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="255" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bio" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Comment__FilmID__59FA5E80">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__UserID__5AEE82B9">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DislikedF__FilmI__5BE2A6F2">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="DislikedFilms" Type="Self.DislikedFilms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DislikedFilms">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DislikedF__UserI__5CD6CB2B">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DislikedFilms" Type="Self.DislikedFilms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DislikedFilms">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film__CategoryID__5DCAEF64">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film__DublajID__5EBF139D">
+          <End Role="Dublaj" Type="Self.Dublaj" Multiplicity="0..1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dublaj">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="DublajID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_A__Actor__5FB337D6">
+          <End Role="Actor" Type="Self.Actor" Multiplicity="0..1" />
+          <End Role="Film_to_Actor" Type="Self.Film_to_Actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Actor">
+              <PropertyRef Name="ActorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_A__FilmI__60A75C0F">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_to_Actor" Type="Self.Film_to_Actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Actor">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_C__Count__619B8048">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Film_to_Country" Type="Self.Film_to_Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Country">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_C__FilmI__628FA481">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_to_Country" Type="Self.Film_to_Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Country">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_D__Direc__6383C8BA">
+          <End Role="Director" Type="Self.Director" Multiplicity="0..1" />
+          <End Role="Film_to_Director" Type="Self.Film_to_Director" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Director">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Director">
+              <PropertyRef Name="DirectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_D__FilmI__6477ECF3">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_to_Director" Type="Self.Film_to_Director" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Director">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_G__FilmI__656C112C">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_to_Genre" Type="Self.Film_to_Genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Genre">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_G__Genre__66603565">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Film_to_Genre" Type="Self.Film_to_Genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Genre">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LikedFilm__FilmI__6754599E">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="LikedFilms" Type="Self.LikedFilms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LikedFilms">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LikedFilm__UserI__68487DD7">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LikedFilms" Type="Self.LikedFilms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LikedFilms">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewsComme__NewsI__693CA210">
+          <End Role="News" Type="Self.News" Multiplicity="0..1" />
+          <End Role="NewsComment" Type="Self.NewsComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NewsComment">
+              <PropertyRef Name="NewsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewsComme__UserI__6A30C649">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="NewsComment" Type="Self.NewsComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NewsComment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavedFilm__FilmI__6B24EA82">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="SavedFilms" Type="Self.SavedFilms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SavedFilms">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavedFilm__UserI__6C190EBB">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SavedFilms" Type="Self.SavedFilms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SavedFilms">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovieStarModelStoreContainer">
+          <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Director" EntityType="Self.Director" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DislikedFilms" EntityType="Self.DislikedFilms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dublaj" EntityType="Self.Dublaj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film_to_Actor" EntityType="Self.Film_to_Actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film_to_Country" EntityType="Self.Film_to_Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film_to_Director" EntityType="Self.Film_to_Director" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Film_to_Genre" EntityType="Self.Film_to_Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LikedFilms" EntityType="Self.LikedFilms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsComment" EntityType="Self.NewsComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SavedFilms" EntityType="Self.SavedFilms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Comment__FilmID__59FA5E80" Association="Self.FK__Comment__FilmID__59FA5E80">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__UserID__5AEE82B9" Association="Self.FK__Comment__UserID__5AEE82B9">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DislikedF__FilmI__5BE2A6F2" Association="Self.FK__DislikedF__FilmI__5BE2A6F2">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="DislikedFilms" EntitySet="DislikedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DislikedF__UserI__5CD6CB2B" Association="Self.FK__DislikedF__UserI__5CD6CB2B">
+            <End Role="User" EntitySet="User" />
+            <End Role="DislikedFilms" EntitySet="DislikedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film__CategoryID__5DCAEF64" Association="Self.FK__Film__CategoryID__5DCAEF64">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Film" EntitySet="Film" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film__DublajID__5EBF139D" Association="Self.FK__Film__DublajID__5EBF139D">
+            <End Role="Dublaj" EntitySet="Dublaj" />
+            <End Role="Film" EntitySet="Film" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_A__Actor__5FB337D6" Association="Self.FK__Film_to_A__Actor__5FB337D6">
+            <End Role="Actor" EntitySet="Actor" />
+            <End Role="Film_to_Actor" EntitySet="Film_to_Actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_A__FilmI__60A75C0F" Association="Self.FK__Film_to_A__FilmI__60A75C0F">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Film_to_Actor" EntitySet="Film_to_Actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_C__Count__619B8048" Association="Self.FK__Film_to_C__Count__619B8048">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Film_to_Country" EntitySet="Film_to_Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_C__FilmI__628FA481" Association="Self.FK__Film_to_C__FilmI__628FA481">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Film_to_Country" EntitySet="Film_to_Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_D__Direc__6383C8BA" Association="Self.FK__Film_to_D__Direc__6383C8BA">
+            <End Role="Director" EntitySet="Director" />
+            <End Role="Film_to_Director" EntitySet="Film_to_Director" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_D__FilmI__6477ECF3" Association="Self.FK__Film_to_D__FilmI__6477ECF3">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Film_to_Director" EntitySet="Film_to_Director" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_G__FilmI__656C112C" Association="Self.FK__Film_to_G__FilmI__656C112C">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="Film_to_Genre" EntitySet="Film_to_Genre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_G__Genre__66603565" Association="Self.FK__Film_to_G__Genre__66603565">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Film_to_Genre" EntitySet="Film_to_Genre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LikedFilm__FilmI__6754599E" Association="Self.FK__LikedFilm__FilmI__6754599E">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="LikedFilms" EntitySet="LikedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LikedFilm__UserI__68487DD7" Association="Self.FK__LikedFilm__UserI__68487DD7">
+            <End Role="User" EntitySet="User" />
+            <End Role="LikedFilms" EntitySet="LikedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewsComme__NewsI__693CA210" Association="Self.FK__NewsComme__NewsI__693CA210">
+            <End Role="News" EntitySet="News" />
+            <End Role="NewsComment" EntitySet="NewsComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewsComme__UserI__6A30C649" Association="Self.FK__NewsComme__UserI__6A30C649">
+            <End Role="User" EntitySet="User" />
+            <End Role="NewsComment" EntitySet="NewsComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavedFilm__FilmI__6B24EA82" Association="Self.FK__SavedFilm__FilmI__6B24EA82">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="SavedFilms" EntitySet="SavedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavedFilm__UserI__6C190EBB" Association="Self.FK__SavedFilm__UserI__6C190EBB">
+            <End Role="User" EntitySet="User" />
+            <End Role="SavedFilms" EntitySet="SavedFilms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieStarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Film_to_Actor" Relationship="Self.FK__Film_to_A__Actor__5FB337D6" FromRole="Actor" ToRole="Film_to_Actor" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Films" Relationship="Self.FK__Film__CategoryID__5DCAEF64" FromRole="Category" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="ComTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Film" Relationship="Self.FK__Comment__FilmID__59FA5E80" FromRole="Comment" ToRole="Film" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Comment__UserID__5AEE82B9" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Film_to_Country" Relationship="Self.FK__Film_to_C__Count__619B8048" FromRole="Country" ToRole="Film_to_Country" />
+        </EntityType>
+        <EntityType Name="Director">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Film_to_Director" Relationship="Self.FK__Film_to_D__Direc__6383C8BA" FromRole="Director" ToRole="Film_to_Director" />
+        </EntityType>
+        <EntityType Name="DislikedFilm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="DisLikeTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Film" Relationship="Self.FK__DislikedF__FilmI__5BE2A6F2" FromRole="DislikedFilms" ToRole="Film" />
+          <NavigationProperty Name="User" Relationship="Self.FK__DislikedF__UserI__5CD6CB2B" FromRole="DislikedFilms" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Dublaj">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Films" Relationship="Self.FK__Film__DublajID__5EBF139D" FromRole="Dublaj" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="DateTime" Precision="3" />
+          <Property Name="IMDB" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="Iframe" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Trailer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Aboout" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Length" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Cover_Img" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Main_Img" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Iframe_Cover_Img" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ViewCount" Type="Int32" />
+          <Property Name="DublajID" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="Video_Img" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Film__CategoryID__5DCAEF64" FromRole="Film" ToRole="Category" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__FilmID__59FA5E80" FromRole="Film" ToRole="Comment" />
+          <NavigationProperty Name="DislikedFilms" Relationship="Self.FK__DislikedF__FilmI__5BE2A6F2" FromRole="Film" ToRole="DislikedFilms" />
+          <NavigationProperty Name="Dublaj" Relationship="Self.FK__Film__DublajID__5EBF139D" FromRole="Film" ToRole="Dublaj" />
+          <NavigationProperty Name="Film_to_Actor" Relationship="Self.FK__Film_to_A__FilmI__60A75C0F" FromRole="Film" ToRole="Film_to_Actor" />
+          <NavigationProperty Name="Film_to_Country" Relationship="Self.FK__Film_to_C__FilmI__628FA481" FromRole="Film" ToRole="Film_to_Country" />
+          <NavigationProperty Name="Film_to_Director" Relationship="Self.FK__Film_to_D__FilmI__6477ECF3" FromRole="Film" ToRole="Film_to_Director" />
+          <NavigationProperty Name="Film_to_Genre" Relationship="Self.FK__Film_to_G__FilmI__656C112C" FromRole="Film" ToRole="Film_to_Genre" />
+          <NavigationProperty Name="LikedFilms" Relationship="Self.FK__LikedFilm__FilmI__6754599E" FromRole="Film" ToRole="LikedFilms" />
+          <NavigationProperty Name="SavedFilms" Relationship="Self.FK__SavedFilm__FilmI__6B24EA82" FromRole="Film" ToRole="SavedFilms" />
+        </EntityType>
+        <EntityType Name="Film_to_Actor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="ActorID" Type="Int32" />
+          <NavigationProperty Name="Actor" Relationship="Self.FK__Film_to_A__Actor__5FB337D6" FromRole="Film_to_Actor" ToRole="Actor" />
+          <NavigationProperty Name="Film" Relationship="Self.FK__Film_to_A__FilmI__60A75C0F" FromRole="Film_to_Actor" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Film_to_Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="CountryID" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__Film_to_C__Count__619B8048" FromRole="Film_to_Country" ToRole="Country" />
+          <NavigationProperty Name="Film" Relationship="Self.FK__Film_to_C__FilmI__628FA481" FromRole="Film_to_Country" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Film_to_Director">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="DirectorID" Type="Int32" />
+          <NavigationProperty Name="Director" Relationship="Self.FK__Film_to_D__Direc__6383C8BA" FromRole="Film_to_Director" ToRole="Director" />
+          <NavigationProperty Name="Film" Relationship="Self.FK__Film_to_D__FilmI__6477ECF3" FromRole="Film_to_Director" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Film_to_Genre">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="GenreID" Type="Int32" />
+          <NavigationProperty Name="Film" Relationship="Self.FK__Film_to_G__FilmI__656C112C" FromRole="Film_to_Genre" ToRole="Film" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK__Film_to_G__Genre__66603565" FromRole="Film_to_Genre" ToRole="Genre" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Film_to_Genre" Relationship="Self.FK__Film_to_G__Genre__66603565" FromRole="Genre" ToRole="Film_to_Genre" />
+        </EntityType>
+        <EntityType Name="LikedFilm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="LikeTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Film" Relationship="Self.FK__LikedFilm__FilmI__6754599E" FromRole="LikedFilms" ToRole="Film" />
+          <NavigationProperty Name="User" Relationship="Self.FK__LikedFilm__UserI__68487DD7" FromRole="LikedFilms" ToRole="User" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image_1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Image_2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Image_3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Image_4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Image_5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PostDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="NewsComments" Relationship="Self.FK__NewsComme__NewsI__693CA210" FromRole="News" ToRole="NewsComment" />
+        </EntityType>
+        <EntityType Name="NewsComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="NewsID" Type="Int32" />
+          <Property Name="ComTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="News" Relationship="Self.FK__NewsComme__NewsI__693CA210" FromRole="NewsComment" ToRole="News" />
+          <NavigationProperty Name="User" Relationship="Self.FK__NewsComme__UserI__6A30C649" FromRole="NewsComment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SavedFilm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="FilmID" Type="Int32" />
+          <Property Name="SaveTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Film" Relationship="Self.FK__SavedFilm__FilmI__6B24EA82" FromRole="SavedFilms" ToRole="Film" />
+          <NavigationProperty Name="User" Relationship="Self.FK__SavedFilm__UserI__6C190EBB" FromRole="SavedFilms" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__UserID__5AEE82B9" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="DislikedFilms" Relationship="Self.FK__DislikedF__UserI__5CD6CB2B" FromRole="User" ToRole="DislikedFilms" />
+          <NavigationProperty Name="LikedFilms" Relationship="Self.FK__LikedFilm__UserI__68487DD7" FromRole="User" ToRole="LikedFilms" />
+          <NavigationProperty Name="NewsComments" Relationship="Self.FK__NewsComme__UserI__6A30C649" FromRole="User" ToRole="NewsComment" />
+          <NavigationProperty Name="SavedFilms" Relationship="Self.FK__SavedFilm__UserI__6C190EBB" FromRole="User" ToRole="SavedFilms" />
+        </EntityType>
+        <Association Name="FK__Film_to_A__Actor__5FB337D6">
+          <End Role="Actor" Type="Self.Actor" Multiplicity="0..1" />
+          <End Role="Film_to_Actor" Type="Self.Film_to_Actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Actor">
+              <PropertyRef Name="ActorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film__CategoryID__5DCAEF64">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__FilmID__59FA5E80">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__UserID__5AEE82B9">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_C__Count__619B8048">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Film_to_Country" Type="Self.Film_to_Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Country">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_D__Direc__6383C8BA">
+          <End Role="Director" Type="Self.Director" Multiplicity="0..1" />
+          <End Role="Film_to_Director" Type="Self.Film_to_Director" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Director">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Director">
+              <PropertyRef Name="DirectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DislikedF__FilmI__5BE2A6F2">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="DislikedFilms" Type="Self.DislikedFilm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DislikedFilms">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DislikedF__UserI__5CD6CB2B">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DislikedFilms" Type="Self.DislikedFilm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DislikedFilms">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film__DublajID__5EBF139D">
+          <End Role="Dublaj" Type="Self.Dublaj" Multiplicity="0..1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dublaj">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="DublajID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_A__FilmI__60A75C0F">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_to_Actor" Type="Self.Film_to_Actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Actor">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_C__FilmI__628FA481">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_to_Country" Type="Self.Film_to_Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Country">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_D__FilmI__6477ECF3">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_to_Director" Type="Self.Film_to_Director" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Director">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_G__FilmI__656C112C">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="Film_to_Genre" Type="Self.Film_to_Genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Genre">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LikedFilm__FilmI__6754599E">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="LikedFilms" Type="Self.LikedFilm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LikedFilms">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavedFilm__FilmI__6B24EA82">
+          <End Role="Film" Type="Self.Film" Multiplicity="0..1" />
+          <End Role="SavedFilms" Type="Self.SavedFilm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SavedFilms">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Film_to_G__Genre__66603565">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Film_to_Genre" Type="Self.Film_to_Genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Film_to_Genre">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LikedFilm__UserI__68487DD7">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LikedFilms" Type="Self.LikedFilm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LikedFilms">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewsComme__NewsI__693CA210">
+          <End Role="News" Type="Self.News" Multiplicity="0..1" />
+          <End Role="NewsComment" Type="Self.NewsComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NewsComment">
+              <PropertyRef Name="NewsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NewsComme__UserI__6A30C649">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="NewsComment" Type="Self.NewsComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NewsComment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavedFilm__UserI__6C190EBB">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SavedFilms" Type="Self.SavedFilm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SavedFilms">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actors" EntityType="Self.Actor" />
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Directors" EntityType="Self.Director" />
+          <EntitySet Name="DislikedFilms" EntityType="Self.DislikedFilm" />
+          <EntitySet Name="Dublajs" EntityType="Self.Dublaj" />
+          <EntitySet Name="Films" EntityType="Self.Film" />
+          <EntitySet Name="Film_to_Actor" EntityType="Self.Film_to_Actor" />
+          <EntitySet Name="Film_to_Country" EntityType="Self.Film_to_Country" />
+          <EntitySet Name="Film_to_Director" EntityType="Self.Film_to_Director" />
+          <EntitySet Name="Film_to_Genre" EntityType="Self.Film_to_Genre" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="LikedFilms" EntityType="Self.LikedFilm" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="NewsComments" EntityType="Self.NewsComment" />
+          <EntitySet Name="SavedFilms" EntityType="Self.SavedFilm" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Film_to_A__Actor__5FB337D6" Association="Self.FK__Film_to_A__Actor__5FB337D6">
+            <End Role="Actor" EntitySet="Actors" />
+            <End Role="Film_to_Actor" EntitySet="Film_to_Actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film__CategoryID__5DCAEF64" Association="Self.FK__Film__CategoryID__5DCAEF64">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__FilmID__59FA5E80" Association="Self.FK__Comment__FilmID__59FA5E80">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__UserID__5AEE82B9" Association="Self.FK__Comment__UserID__5AEE82B9">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_C__Count__619B8048" Association="Self.FK__Film_to_C__Count__619B8048">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Film_to_Country" EntitySet="Film_to_Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_D__Direc__6383C8BA" Association="Self.FK__Film_to_D__Direc__6383C8BA">
+            <End Role="Director" EntitySet="Directors" />
+            <End Role="Film_to_Director" EntitySet="Film_to_Director" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DislikedF__FilmI__5BE2A6F2" Association="Self.FK__DislikedF__FilmI__5BE2A6F2">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="DislikedFilms" EntitySet="DislikedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DislikedF__UserI__5CD6CB2B" Association="Self.FK__DislikedF__UserI__5CD6CB2B">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DislikedFilms" EntitySet="DislikedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film__DublajID__5EBF139D" Association="Self.FK__Film__DublajID__5EBF139D">
+            <End Role="Dublaj" EntitySet="Dublajs" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_A__FilmI__60A75C0F" Association="Self.FK__Film_to_A__FilmI__60A75C0F">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Film_to_Actor" EntitySet="Film_to_Actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_C__FilmI__628FA481" Association="Self.FK__Film_to_C__FilmI__628FA481">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Film_to_Country" EntitySet="Film_to_Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_D__FilmI__6477ECF3" Association="Self.FK__Film_to_D__FilmI__6477ECF3">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Film_to_Director" EntitySet="Film_to_Director" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_G__FilmI__656C112C" Association="Self.FK__Film_to_G__FilmI__656C112C">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="Film_to_Genre" EntitySet="Film_to_Genre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LikedFilm__FilmI__6754599E" Association="Self.FK__LikedFilm__FilmI__6754599E">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="LikedFilms" EntitySet="LikedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavedFilm__FilmI__6B24EA82" Association="Self.FK__SavedFilm__FilmI__6B24EA82">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="SavedFilms" EntitySet="SavedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Film_to_G__Genre__66603565" Association="Self.FK__Film_to_G__Genre__66603565">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Film_to_Genre" EntitySet="Film_to_Genre" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LikedFilm__UserI__68487DD7" Association="Self.FK__LikedFilm__UserI__68487DD7">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LikedFilms" EntitySet="LikedFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewsComme__NewsI__693CA210" Association="Self.FK__NewsComme__NewsI__693CA210">
+            <End Role="News" EntitySet="News" />
+            <End Role="NewsComment" EntitySet="NewsComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NewsComme__UserI__6A30C649" Association="Self.FK__NewsComme__UserI__6A30C649">
+            <End Role="User" EntitySet="Users" />
+            <End Role="NewsComment" EntitySet="NewsComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavedFilm__UserI__6C190EBB" Association="Self.FK__SavedFilm__UserI__6C190EBB">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SavedFilms" EntitySet="SavedFilms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieStarModelStoreContainer" CdmEntityContainer="MSEntities">
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="MovieStarModel.Actor">
+              <MappingFragment StoreEntitySet="Actor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="MovieStarModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="MovieStarModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="MovieStarModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="ComTime" ColumnName="ComTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="MovieStarModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Directors">
+            <EntityTypeMapping TypeName="MovieStarModel.Director">
+              <MappingFragment StoreEntitySet="Director">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DislikedFilms">
+            <EntityTypeMapping TypeName="MovieStarModel.DislikedFilm">
+              <MappingFragment StoreEntitySet="DislikedFilms">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="DisLikeTime" ColumnName="DisLikeTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dublajs">
+            <EntityTypeMapping TypeName="MovieStarModel.Dublaj">
+              <MappingFragment StoreEntitySet="Dublaj">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="MovieStarModel.Film">
+              <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="IMDB" ColumnName="IMDB" />
+                <ScalarProperty Name="Iframe" ColumnName="Iframe" />
+                <ScalarProperty Name="Trailer" ColumnName="Trailer" />
+                <ScalarProperty Name="Aboout" ColumnName="Aboout" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Cover_Img" ColumnName="Cover_Img" />
+                <ScalarProperty Name="Main_Img" ColumnName="Main_Img" />
+                <ScalarProperty Name="Iframe_Cover_Img" ColumnName="Iframe_Cover_Img" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="DublajID" ColumnName="DublajID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Video_Img" ColumnName="Video_Img" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Film_to_Actor">
+            <EntityTypeMapping TypeName="MovieStarModel.Film_to_Actor">
+              <MappingFragment StoreEntitySet="Film_to_Actor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="ActorID" ColumnName="ActorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Film_to_Country">
+            <EntityTypeMapping TypeName="MovieStarModel.Film_to_Country">
+              <MappingFragment StoreEntitySet="Film_to_Country">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Film_to_Director">
+            <EntityTypeMapping TypeName="MovieStarModel.Film_to_Director">
+              <MappingFragment StoreEntitySet="Film_to_Director">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="DirectorID" ColumnName="DirectorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Film_to_Genre">
+            <EntityTypeMapping TypeName="MovieStarModel.Film_to_Genre">
+              <MappingFragment StoreEntitySet="Film_to_Genre">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="MovieStarModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LikedFilms">
+            <EntityTypeMapping TypeName="MovieStarModel.LikedFilm">
+              <MappingFragment StoreEntitySet="LikedFilms">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="LikeTime" ColumnName="LikeTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="MovieStarModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Image_1" ColumnName="Image_1" />
+                <ScalarProperty Name="Image_2" ColumnName="Image_2" />
+                <ScalarProperty Name="Image_3" ColumnName="Image_3" />
+                <ScalarProperty Name="Image_4" ColumnName="Image_4" />
+                <ScalarProperty Name="Image_5" ColumnName="Image_5" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsComments">
+            <EntityTypeMapping TypeName="MovieStarModel.NewsComment">
+              <MappingFragment StoreEntitySet="NewsComment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+                <ScalarProperty Name="ComTime" ColumnName="ComTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SavedFilms">
+            <EntityTypeMapping TypeName="MovieStarModel.SavedFilm">
+              <MappingFragment StoreEntitySet="SavedFilms">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="SaveTime" ColumnName="SaveTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MovieStarModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

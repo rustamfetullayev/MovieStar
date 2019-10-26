@@ -1,0 +1,156 @@
+﻿@model MovieStar.Models.User
+@{
+    ViewBag.Title = "MovieStar - "+Model.Username+ " - Edit";
+}
+
+<!-- Main theme -->
+<section id="main_theme">
+    <img src="~/Source/images/register_back.jpg" alt="" class="back_img">
+    <div class="text">
+        <p>Edit your account</p>
+        <h3>@Model.Name</h3>
+    </div>
+    <img class="arrow" src="~/Source/images/scroll-arrow.svg" alt="">
+</section>
+<!-- End of section -->
+
+<!-- Edit -->
+<section id="edit_usr_profile">
+    <div class="container">
+        <div class="row pt-5 pb-5">
+            <div class="col-md-3">
+                <nav class="setting_nav">
+                    <ul>
+                        <li id="edit" class="active">Edit Profile</li>
+                        <li id="pass">Change Password</li>
+                        <li id="pic">Change Picture</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-9">
+                <div class="screen">
+                    @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="edit_profile selected">
+                            <div class="container">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <label for="name">Name</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="text" name="name" value="@Model.Name" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <label for="username">Username</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="text" name="username" value="@Model.Username" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <label for="bio">Bio</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="text" name="bio" value="@Model.Bio">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <label for="email">Email</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="email" name="email" value="@Model.Email" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <input class="submit" type="submit" value="Save" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="edit_pic">
+                            <div class="container">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-12 mb-4 d-flex justify-content-center">
+                                            <label>Profile image</label>
+                                        </div>
+                                        <div class="col-md-12 mb-4 d-flex justify-content-center">
+                                            <img id="user_show_img" src="~/Source/images/@Model.Image" class="usr_image" alt="">
+                                        </div>
+                                        <div class="col-md-12 mb-4 d-flex justify-content-center">
+                                            <input type="file" name="NewImage" class="new_img" onchange="readURL(this)"/>
+                                            <input type="hidden" value="@Model.Image" name="Image" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <input class="submit" type="submit" value="Save" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @using (Html.BeginForm("EditPassword", "Account", FormMethod.Post))
+                    {
+                        <div class="edit_pass">
+                            <div class="container">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <label for="oldpass">Old Password</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input name="oldpass" type="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <label for="newpass">New Password</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="password" name="newpass" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <label for="confirmpass">Confirm New Password</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="password" name="confirmpass" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <input class="submit" type="submit" value="Save" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-9 offset-md-3 d-flex justify-content-center">
+                @if (ViewBag.EditError != null)
+                {
+                    <div class="alert alert-danger">
+                        <p>@ViewBag.EditError</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of edit -->

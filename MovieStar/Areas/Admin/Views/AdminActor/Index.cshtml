@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MovieStar.Models.Actor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <input class="form-control" id="search" placeholder="Type to search ..." type="search" />
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Image
+        </th>
+        <th>
+            Name
+        </th>
+        <th></th>
+    </tr>
+</table>
+
+<table class="table" id="actors_table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="~/Source/images/@item.Image" style="width:120px;height:160px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @if (Model.ToArray().Length > 1)
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts
+{
+    <script>
+
+        $("#search").keyup(function () {
+            $("#actors_table").html("");
+
+            $.ajax({
+                url: "/Admin/AdminActor/Search",
+                data: { text: $(this).val() },
+                type: "GET",
+                dataType: "html",
+                success: function (res) {
+                    if (res.length != 0) {
+                        $("#actors_table").append(res);
+                    }
+                }
+            })
+        })
+
+    </script>
+}

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MovieStar.Models.Film>
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <img src="~/Source/images/@item.Main_Img" style="width:120px; height:160px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @item.IMDB.ToString().Substring(0, 3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Length)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dublaj.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @item.Year.Value.Year
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}

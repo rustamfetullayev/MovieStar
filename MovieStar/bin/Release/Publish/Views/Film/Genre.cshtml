@@ -1,0 +1,245 @@
+﻿@using MovieStar.Models
+@model MovieStar.ViewModels.AllFilmsVM
+@{
+    ViewBag.Title = "MovieStar - " + ViewBag.Genre;
+}
+
+<!-- Main theme -->
+<section id="main_theme">
+    <img src="~/Source/images/world_war_z_main.jpg" alt="" class="back_img">
+    <div class="text">
+        <p>THE VERY LATEST</p>
+        <h3>FILMS</h3>
+    </div>
+    <div class="search">
+        <form method="post" action="/Film/Search">
+            <input type="text" placeholder="Type to search" id="search" name="text" class="form-control" required>
+            <button type="submit" class="fas fa-search"></button>
+        </form>
+        <!-- Search AJAX -->
+        <!-- End of Search -->
+    </div>
+</section>
+<!-- End of section -->
+<!-- Films -->
+<section id="films">
+    <div class="container">
+        <div class="row" id="all_films">
+            <div class="col-md-3 d-flex justify-content-center mt-5">
+                <div class="select_list">
+                    <button>
+                        Select Genre
+                        <div class="dropdown_arrow down"></div>
+                        <div class="clone_down"></div>
+                        <div class="clone_up"></div>
+                    </button>
+                    <ul class="dropdown_select_list">
+                        @foreach (var item in Model.Genres)
+                        {
+                            <li>
+                                <a href="/Film/Genre/@item.Name">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center mt-5">
+                <div class="select_list">
+                    <button>
+                        Select Category
+                        <div class="dropdown_arrow down"></div>
+                        <div class="clone_down"></div>
+                        <div class="clone_up"></div>
+                    </button>
+                    <ul class="dropdown_select_list">
+                        @foreach (var item in Model.Categories)
+                        {
+                            <li>
+                                <a href="/Film/Category/@item.Name">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center mt-5">
+                <div class="select_list">
+                    <button>
+                        Select Translation
+                        <div class="dropdown_arrow down"></div>
+                        <div class="clone_down"></div>
+                        <div class="clone_up"></div>
+                    </button>
+                    <ul class="dropdown_select_list">
+                        @foreach (var item in Model.Dublaj)
+                        {
+                            <li>
+                                <a href="/Film/Dublaj/@item.Name">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center mt-5">
+                <div class="select_list">
+                    <button>
+                        Order by
+                        <div class="dropdown_arrow down"></div>
+                        <div class="clone_down"></div>
+                        <div class="clone_up"></div>
+                    </button>
+                    <ul class="dropdown_select_list">
+                        <li>
+                            <a href="/Film/Year">Year</a>
+                        </li>
+                        <li>
+                            <a href="/Film/IMDB">IMDB</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @foreach (var item in Model.Films)
+            {
+                <div class="col-md-12 mt-5">
+                    <div class="name">
+                        <h4>@item.Name</h4>
+                    </div>
+                    <div class="inner">
+                        <div class="link_image">
+                            <a href="/Film/Single/@item.ID">
+                                <img src="~/Source/images/@item.Main_Img" alt="">
+                                <span class="dublaj" style="background-color:@item.Dublaj.Color">@item.Dublaj.Name</span>
+                            </a>
+                        </div>
+                        <div class="link_video">
+                            <a href="/Film/Single/@item.ID">
+                                <img src="~/Source/images/@item.Video_Img" alt="">
+                                <span class="play"></span>
+                                <span class="layout"></span>
+                                <span class="length">@item.Length</span>
+                            </a>
+                        </div>
+                        <div class="about">
+                            <dl>
+                                <dt>Year</dt>
+                                <dd>@item.Year.Value.Year</dd>
+                                <dt>IMDB</dt>
+                                <dd>@item.IMDB</dd>
+                                <dt>Country</dt>
+                                <dd>
+                                    @{ var d = 0; }
+                                    @foreach (var c in Model.Country_of_Film.Where(f => f.FilmID == item.ID))
+                                    {
+                                        d++;
+                                        <a href="/Film/Country/@c.Country.Name">@c.Country.Name@(d < Model.Country_of_Film.Where(f => f.CountryID == item.ID).ToArray().Length ? "," : "" ) </a>
+                                    }
+                                </dd>
+                                <dt>Genre</dt>
+                                <dd>
+                                    @{ var i = 0; }
+                                    @foreach (var g in Model.Genres_of_Film.Where(f => f.FilmID == item.ID))
+                                    {
+                                        i++;
+                                        <a href="/Film/Genre/@g.Genre.Name">@g.Genre.Name@(i < Model.Genres_of_Film.Where(f => f.FilmID == item.ID).ToArray().Length ? "," : "" ) </a>
+                                    }
+                                </dd>
+                                <dt>Views</dt>
+                                <dd>
+                                    <i class="fas fa-eye"></i>@item.ViewCount
+                                </dd>
+                            </dl>
+                        </div>
+                        @if (Session["user"] != null && item.SavedFilms.Where(s => s.UserID == ((User)Session["user"]).ID).Count() == 1)
+                        {
+                            <i class="fas fa-bookmark save_icon"></i>
+                            <input type="hidden" name="filmid" value="@item.ID" />
+                        }
+                        else if (Session["user"] != null && item.SavedFilms.Where(s => s.UserID == ((User)Session["user"]).ID).Count() == 0)
+                        {
+                            <i class="far fa-bookmark save_icon"></i>
+                            <input type="hidden" name="filmid" value="@item.ID" />
+                        }
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>
+<!-- End of Films -->
+
+@section scripts
+{
+    <script>
+        //Loading films with scroll event...
+        var skipCount = 0;
+
+        var scrollLoadFunction = function () {
+            if ($(document).height() - $(window).scrollTop() - $(window).height() < 100) {
+                skipCount += 3;
+
+                $.ajax({
+                    url: "/Film/ScrollLoadFilmsGenre",
+                    type: "GET",
+                    data: { skip: skipCount, genre: "@ViewBag.Genre"},
+                    success: function (res) {
+                        if (res.trim().length != 0) {
+                            $("#all_films").append(res);
+
+                        }
+                        else {
+                            window.removeEventListener("scroll", scrollLoadFunction);
+                        }
+                    }
+                })
+            }
+        }
+
+        window.addEventListener("scroll", scrollLoadFunction);
+
+
+        //Live Search
+        $("#search").keyup(function () {
+
+            if ($(this).val()) {
+
+                $.ajax({
+                    url: "/Film/LiveSearch",
+                    data: { query: $(this).val() },
+                    type: "GET",
+                    dataType: "html",
+                    success: function (res) {
+                        if (res.length != 79) {
+                            $("#main_theme .search").append(res);
+                        }
+                        else {
+                            $("#main_theme .search #live_search").css('display', 'none');
+                        }
+                    }
+                })
+            }
+            else {
+                $("#main_theme .search #live_search").css('display', 'none');
+            }
+        })
+
+        //SaveFilm
+        $(document).on("click", ".save_icon", function (e) {
+            $.ajax({
+                url: "/Film/SaveFilm",
+                data: { filmid: $(this).next().val() },
+                type: "GET",
+                dataType: "html",
+                success: function (res) {
+                    if (res == 1) {
+                        $(e.target).removeClass("far");
+                        $(e.target).addClass("fas");
+                    }
+                    else if (res == 0) {
+                        $(e.target).removeClass("fas");
+                        $(e.target).addClass("far");
+                    }
+                }
+            })
+        })
+    </script>
+}

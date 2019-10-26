@@ -1,0 +1,10 @@
+﻿@model MovieStar.ViewModels.ActorIndexVM
+
+<div id="live_search_actor">
+    @foreach (var item in Model.Actors)
+    {
+        <a href="/Film/Actor/@item.Name">
+            <p class="actor_name">@item.Name</p>
+        </a>
+    }
+</div> 
